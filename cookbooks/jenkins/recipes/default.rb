@@ -3,49 +3,27 @@
 # Cookbook Name:: jenkinsstack
 # Recipe:: default
 #
-# Copyright 2014, Rackspace
-#
-# Gracefully handle the failure for an invalid installation type
 
 
+execute 'createusr' do
+ cwd '/var'
+ command 'sudo wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -'
+end
 
-#cookbook_file "/etc/apache2/sites-available/jenkins.conf" do
- # source "jenkins.conf"
- # mode "0644"
-#end
+execute 'createusr' do
+ cwd '/var'
+ command 'sudo sh -c \'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list\''
+end
 
-
-cookbook_file "/opt/jenkins.sh" do
-  source "jenkins.sh"
-  mode "0677"
+execute 'createusr' do
+ cwd '/var'
+ command 'sudo apt-get update'
 end
 
 
-
-cookbook_file "/opt/jenkins.sh" do
-  source "jenkins.sh"
-  mode "0677"
+package "jenkins" do
+	action :install
 end
-
-#bash "jenkins" do
- # guard_interpreter :bash
-  #code "opt/jenkins.sh"
-#end
-
-
-execute 'startomcat7' do
- cwd '/opt'
- command 'sudo sh jenkins.sh'
-end
-
-
-directory "/var/lib/jenkins/.ssh" do
- owner 'jenkins'
- group 'root'
- mode '0755'
- action :create
-end
-
 
 cookbook_file "/etc/sudoers" do
   source "sudoers"
