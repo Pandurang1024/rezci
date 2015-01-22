@@ -20,14 +20,22 @@ cookbook_file "/opt/jenkins.sh" do
   mode "0677"
 end
 
+
+
 cookbook_file "/opt/jenkins.sh" do
   source "jenkins.sh"
   mode "0677"
 end
 
-bash "jenkins" do
-  guard_interpreter :bash
-  code "opt/jenkins.sh"
+#bash "jenkins" do
+ # guard_interpreter :bash
+  #code "opt/jenkins.sh"
+#end
+
+
+execute 'startomcat7' do
+ cwd '/opt'
+ command 'sudo sh jenkins.sh'
 end
 
 
