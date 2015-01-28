@@ -15,8 +15,7 @@ bash "install_something" do
   cwd "/tmp"
   code <<-EOH
    sudo apt-get install python-software-properties
-   sudo add-apt-repository ppa:chris-lea/node.js
-   send "\n"
+   echo -ne '\n' | sudo add-apt-repository ppa:chris-lea/node.js
    sudo apt-get update
    sudo apt-get install npm nodejs-legacy -y
    sudo apt-get install nodejs -y
