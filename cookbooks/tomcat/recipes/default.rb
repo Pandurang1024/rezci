@@ -13,10 +13,9 @@ bash "install_something" do
   cwd "/tmp"
   code <<-EOH
    sudo apt-get install software-properties-common python-software-properties -y
-   sudo add-apt-repository ppa:webupd8team/java
-   send "\n"
+   echo -ne '\n' | sudo add-apt-repository ppa:webupd8team/java
    sudo apt-get update
-   sudo sudo apt-get install oracle-java8-installer
+   sudo sudo apt-get install oracle-java8-installer -y
    sudo apt-get install oracle-java8-set-default
   EOH
 end
