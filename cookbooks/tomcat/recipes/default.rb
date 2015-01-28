@@ -16,12 +16,20 @@ bash "install_something" do
    sudo add-apt-repository ppa:webupd8team/java
    send "\n"
    sudo apt-get update
+   sudo sudo apt-get install oracle-java8-installer
+   sudo apt-get install oracle-java8-set-default
   EOH
 end
 
 package "tomcat7" do
 	action :install
 end
+
+#sudo apt-get install tomcat7-admin
+package "tomcat7-admin" do
+action :install
+end
+
 
 
 execute 'stoptomcat7' do
@@ -39,6 +47,21 @@ cookbook_file "/var/lib/tomcat7/conf/server.xml" do
   mode "0644"
 end
 
+execute 'removeolduserxml' do
+ cwd '/var/lib/tomcat7/conf'
+ command 'sudo rm server.xml'
+end
+
+cookbook_file "/var/lib/tomcat7/conf/tomcat-users.xml" do
+  source "tomcat-users.xml"
+  mode "0644"
+end
+
+
+cookbook_file "/var/lib/tomcat7/webapps/Calendar.war" do
+  source "Calendar.war"
+  mode "0644"
+end
 
 execute 'startomcat7' do
  cwd '/var/lib/tomcat7/conf'
