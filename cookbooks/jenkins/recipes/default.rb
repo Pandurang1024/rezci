@@ -5,25 +5,26 @@
 #
 
 
-execute 'createusr' do
+execute 'addJenkins' do
  cwd '/var'
  command 'sudo wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -'
 end
 
-execute 'createusr' do
+execute 'addList' do
  cwd '/var'
  command 'sudo sh -c \'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list\''
 end
 
-execute 'createusr' do
+execute 'updtsys' do
  cwd '/var'
  command 'sudo apt-get update'
 end
 
-
 package "jenkins" do
-	action :install
+action :install
 end
+
+
 
 cookbook_file "/etc/sudoers" do
   source "sudoers"
