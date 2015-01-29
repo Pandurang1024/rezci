@@ -12,7 +12,7 @@ bash "install_python_sw" do
   user "root"
   cwd "/tmp"
   code <<-EOH
-  sudo apt-get install python-software-properties
+  sudo apt-get install python-software-properties -y
   EOH
 end
 
