@@ -8,18 +8,48 @@
 #
 
 
-bash "install_something" do
+bash "install_software_properties" do
   user "root"
   cwd "/tmp"
   code <<-EOH
  sudo apt-get install software-properties-common python-software-properties -y
+  EOH
+end
+
+
+bash "install_java_prop8" do
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
  echo -ne '\n' | sudo add-apt-repository ppa:webupd8team/java
  sudo apt-get update
+ 
+  EOH
+end
+
+
+bash "update" do
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
+  sudo apt-get update
+  EOH
+end
+
+
+bash "install_java8" do
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
  sudo apt-get install oracle-java8-set-default -y
  sudo apt-get install maven -y
   EOH
 end
+
+
+
+
 
 package "tomcat7" do
 	action :install
