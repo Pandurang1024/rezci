@@ -12,7 +12,7 @@ bash "install_python_sw" do
   user "root"
   cwd "/tmp"
   code <<-EOH
-   sudo apt-get install python-software-properties
+  sudo apt-get install python-software-properties
   EOH
 end
 
@@ -37,11 +37,8 @@ bash "install_yoman" do
    sudo npm install -g grunt-cli
    sudo apt-get install ruby1.9.1-dev -y
    sudo gem install compass
-   
  EOH
 end
-
-
 
 
 bash "install_xvfb_ff" do
