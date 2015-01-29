@@ -48,7 +48,7 @@ end
 
 execute 'removeolduserxml' do
  cwd '/var/lib/tomcat7/conf'
- command 'sudo rm server.xml'
+ command 'sudo rm tomcat-users.xml'
 end
 
 cookbook_file "/var/lib/tomcat7/conf/tomcat-users.xml" do
@@ -67,6 +67,10 @@ execute 'startomcat7' do
  command 'sudo service tomcat7 start'
 end
 
+execute 'stoptomcat7' do
+ cwd '/opt'
+ command 'sudo service tomcat7 start'
+end
 
 
 
