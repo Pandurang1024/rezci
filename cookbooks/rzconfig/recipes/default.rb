@@ -12,7 +12,25 @@ bash "install_python_sw" do
   user "root"
   cwd "/tmp"
   code <<-EOH
-  sudo apt-get install python-software-properties -y
+  sudo apt-get install software-properties-common python-software-properties -y
+  EOH
+end
+
+
+bash "install_python_sw" do
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
+  sudo apt-get update
+  EOH
+end
+
+
+bash "install_python_sw" do
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
+  sudo apt-get install software-properties-common python-software-properties -y
   EOH
 end
 
@@ -21,7 +39,16 @@ bash "install_nodejs" do
   cwd "/tmp"
   code <<-EOH
    echo -ne '\n' | sudo add-apt-repository ppa:chris-lea/node.js
-   sudo apt-get update
+   
+   EOH
+end
+
+
+
+bash "install_npm" do
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
    sudo apt-get install npm nodejs-legacy -y
    sudo apt-get install nodejs -y
    sudo apt-get install nodejs-dev -y
